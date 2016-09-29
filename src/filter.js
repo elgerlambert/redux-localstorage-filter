@@ -57,7 +57,8 @@ export default function filter(paths) {
   return (storage) => ({
     ...storage,
     put: (key, state, callback) => {
-      storage.put(key, getSubset(state, finalPaths), callback);
+      const subset = typeof paths === 'function' ? paths(state) : getSubset(state, finalPaths);
+      storage.put(key, subset, callback);
     },
   });
 }
