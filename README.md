@@ -21,12 +21,18 @@ For more information on using storage enhancers check out [redux-localstorage](e
 ## API
 ### filter(paths)
 ```js
-type paths = Array<String> | String
+type paths = Array<String> | String | Function
 ```
-A path is a `string` that points to the property key of your redux store that you would like to persist. In order to specify a nested key separate the keys that make up the full path with fullstops (`.`). Specify multiple paths by passing in an `Array`: 
+A path is a `string` that points to the property key of your redux store that you would like to persist. In order to specify a nested key separate the keys that make up the full path with fullstops (`.`). Specify multiple paths by passing in an `Array`:
 
 ```js
 filter(['key', 'another.key']),
+```
+
+Specify dynamic keys by passing a predicate function that returns the subset of the state you'd like to persist:
+
+```js
+filter(state => state.items[state.items.length]),
 ```
 
 ## License
